@@ -1,0 +1,23 @@
+// Prisma schema for Autonomous Business Finance Platform (ABFP)
+// Configured for PostgreSQL via DATABASE_URL environment variable
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Foundational model for system health checks and platform audits
+// Real finance modules will be added in subsequent phases
+model SystemAudit {
+  id        String   @id @default(uuid())
+  event     String
+  status    String
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  @@map("system_audits")
+}
